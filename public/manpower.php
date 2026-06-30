@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Manpower Outsourcing & Janitorial Services – Worldison International Ltd</title>
+
+  <!-- SEO Meta -->
+  <meta name="description" content="Worldison International Ltd provides professional manpower outsourcing and janitorial management services – trained staff, facility cleaning, and operational support for offices, hotels, schools, healthcare, and industries.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Mobile Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- Vendor CSS -->
+  <link href="vendor/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="vendor/swiper/css/swiper.min.css" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/layout.min.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+</head>
+
+<body>
+
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm main-nav">
+  <div class="container">
+    <a class="navbar-brand" href="index.php">
+      <img src="img/logo-dark.png" alt="Worldison International Logo" class="logo-img" style="max-height:50px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ml-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="blog.php">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.php">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://academy.worldison.org">Our Academy</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar End -->
+
+<section class="blog-single">
+  <div class="container">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-2 order-2 order-lg-1">
+        <div class="share-now">
+          <a href="#" class="scrol">Share</a>
+          <div class="sociel-icon">
+            <ul>
+              <li><a href="https://www.facebook.com/wsfcompany"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="https://www.twitter.com/worldison"><i class="fa fa-twitter"></i></a></li>
+              <li><a href="https://www.instagram.com/worldison_sfc"><i class="fa fa-instagram"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-lg-10 order-1 order-lg-2">
+        <article class="single-blog service-details">
+
+          <span class="tag">Facility Management</span>
+          <h1 class="title">Manpower Outsourcing & Janitorial Services</h1>
+          <ul class="meta">
+            <li>By <a href="about.php">Worldison International</a></li>
+            <li><i class="fa fa-clock"></i> Updated: 2025</li>
+          </ul>
+
+          <img src="img/services/7.png" alt="Manpower Outsourcing and Janitorial Services" class="img-fluid mb-4 w-100">
+
+          <p><strong>We provide trusted manpower and janitorial solutions that ensure clean, safe, and well-managed environments for businesses and institutions.</strong></p>
+          <p>
+          At Worldison International Ltd, we understand that the success of any organisation depends on having the right people in the right roles. Our Manpower Outsourcing & Janitorial Management services are designed to help businesses maintain clean, safe, and well-managed environments while optimising human resource efficiency.
+        </p>
+        <p>We supply skilled, semi-skilled, and unskilled personnel for various operational needs and provide professional cleaning and facility maintenance teams to keep workplaces spotless, hygienic, and welcoming.
+        </p>
+        <h3>Our Professional Approach</h3>
+          <h3>Manpower Outsourcing</h3>
+          <p>We provide a flexible, cost-effective solution for businesses that need additional staff without the burden of direct recruitment and management. Our manpower outsourcing covers:</p>
+          <ul>
+            <li>Office administration staff</li>
+            <li>Skilled technical workers.</li>
+            <li>Industrial and factory operatives.</li>
+            <li>Security personnel and guards.</li>
+            <li>Event staff and crowd control teams.</li>
+            <li>Hospitality and customer service staff.</li>
+          </ul>
+          <h4>our process includes:</h4>
+          <p>Careful screening and background checks to ensure reliability and integrity.
+
+Skills assessment and role-specific training.
+
+Ongoing supervision and performance monitoring.
+
+Compliance with all labour laws and occupational health & safety standards.
+</p>
+
+          <h3>Janitorial Management</h3>
+          <p>A clean environment improves productivity, health, and the image of your organisation. Our janitorial services are tailored to your facility’s needs and include:</p>
+          <ul>
+            <li>Daily, weekly, or periodic cleaning schedules.</li>
+            <li>Restroom sanitation and replenishment of supplies.</li>
+            <li>Floor care — sweeping, mopping, polishing, and vacuuming.</li>
+            <li>Waste collection and disposal.</li>
+            <li>Window, wall, and high-surface cleaning.</li>
+            <li>Deep cleaning and disinfection of workspaces</li>
+            <li>We use eco-friendly cleaning agents and modern equipment to ensure safety, hygiene, and environmental sustainability.
+</li>
+          </ul>
+
+          <h3>Target Clients</h3>
+          <p>
+          Our manpower and janitorial management services are ideal for:
+          </p>
+          <ul>
+            <li>Our manpower and janitorial management services are ideal for:</li>
+            <li>Corporate offices and commercial buildings.</li>
+            <li>Hotels, restaurants, and event centres.</li>
+            <li>Hospitals, clinics, and healthcare facilities.</li>
+            <li>Schools, colleges, and universities.</li>
+            <li>Manufacturing plants and warehouses.</li>
+            <li>Government offices and public institutions. </li>
+            <li>Shopping malls and retail outlets. </li>
+          </ul>
+          <h3>Why partner With Worldison </h3>
+          <ul>
+            <li><strong>Quality Workforce:</strong>Professional trained and vetted personnel.</li>
+            <li><strong>Flexibility:</strong>Short-term, Long-term, or project-based staffing solution </li>
+            <li><strong>Cost Savings:</strong>Eliminate recruitment Costs and reduce operational overheads</li>
+            <li><strong>Professional supervision:</strong>Our managers ensure that standards are consistently met.</li>
+            <li><strong>health and Safety Focus:</strong>We comply with occupational safety regulations and hygiene best practices.</li>
+          </ul>
+          <h3>Our Commitment </h3>
+          <p>At Worldison International Ltd, we don’t just provide workers and cleaning teams — we deliver reliability, efficiency, and excellence. Our clients enjoy the peace of mind that comes with knowing their facilities are clean, their staff are competent, and their operations are supported by professionals who take pride in their work.
+          </p>
+
+          <blockquote>
+            <p>“Worldison provides reliable manpower and janitorial services — giving organisations peace of mind with professional staffing and spotless facilities.”</p>
+          </blockquote>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram Section -->
+<section class="instagram">
+  <a href="https://www.instagram.com/worldison_sfc" target="_blank" class="d-block text-center mb-3">
+    <i class="fa fa-instagram" aria-hidden="true"></i>
+    <span>@worldison_sfc</span>
+  </a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="instagram-item">
+          <div class="instagram-item-thum"><img src="images/blog/case-studies-1.png" alt="image"></div>
+          <div class="instagram-item-thum"><img src="images/blog/case-studies-2.png" alt="image"></div>
+          <div class="instagram-item-thum"><img src="images/blog/case-studies-3.png" alt="image"></div>
+          <div class="instagram-item-thum"><img src="images/blog/case-studies-4.png" alt="image"></div>
+          <div class="instagram-item-thum"><img src="images/blog/case-studies-5.png" alt="image"></div>
+          <div class="instagram-item-thum"><img src="images/blog/case-studies-6.png" alt="image"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/2348130826625?text=Hello%20Worldison,%20I%20would%20like%20to%20book%20manpower%20and%20janitorial%20services" 
+   target="_blank" 
+   style="position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; border-radius: 30px; padding: 12px 20px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 999; display: flex; align-items: center; gap: 8px;">
+    💬 Book Us Now
+</a>
+
+<!-- Footer -->
+<section class="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 mx-auto text-center">
+        <img class="footer-logo" src="img/logo-dark.png" alt="Worldison International Logo">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
+        <div class="footer-nav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="index.php">Home </a></li>
+            <li class="nav-item"><a class="nav-link" href="about.php">About </a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
+        <div class="sociale-icon">
+          <ul>
+            <li><a href="https://www.facebook.com/wsfcompany"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://www.twitter.com/worldison"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://www.instagram.com/worldison_sfc"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="copy-right">
+          <p class="margin-b-0"><a class="fweight-700" href="#">Worldison International</a> </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vendor JS -->
+<script src="vendor/jQuery/jquery.min.js"></script>
+<script src="vendor/bootstrap/bootstrap.min.js"></script>
+<script src="vendor/slick/slick.min.js"></script>
+
+<!-- Main JS -->
+<script src="js/script.js"></script>
+<script src="js/firescript.js"></script>
+</body>
+
+</html>
