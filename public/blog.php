@@ -55,72 +55,12 @@ function getImagePath($path) {
     return !empty($path) ? "../" . ltrim($path, "/") : "../assets/images/default.png";
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <title>Worldison Blog</title>
-
-  <!-- SEO Meta -->
-  <meta name="description" content="Worldison International Blog - Updates, insights, and stories.">
-  <meta name="robots" content="index, follow">
-
-  <!-- Mobile Responsive -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Hind:300,400,500,600,700&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-  <!-- Vendor CSS -->
-  <link href="vendor/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" />
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="vendor/swiper/css/swiper.min.css" rel="stylesheet" />
-
-  <!-- Custom Styles -->
-  <link href="css/animate.css" rel="stylesheet">
-  <link href="css/layout.min.css" rel="stylesheet" />
-  <link href="css/style.css" rel="stylesheet" />
-
-  <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-</head>
-
-<body>
-
-<!-- Navbar Start -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm main-nav">
-  <div class="container">
-    <!-- Logo -->
-    <a class="navbar-brand" href="index.php">
-      <img src="img/logo-dark.png" alt="Worldison International Logo" class="logo-img" style="max-height:50px;">
-    </a>
-
-    <!-- Toggler -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav"
-      aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-     <!-- Navigation -->
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ml-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-        <li class="nav-item"><a class="nav-link active" href="blog.php">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.php">About Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://coming_soon.php" target="_blank">Our Academy</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<!-- Navbar End -->
-
+<?php
+$pageTitle = 'Worldison Blog';
+$pageDescription = 'Worldison International Blog - Updates, insights, and stories.';
+?>
+<?php require_once __DIR__ . "/inc/head.php"; ?>
+<?php require_once __DIR__ . "/inc/header.php"; ?>
 <!-- ========== STATIC FEATURED (kept fully static as requested) ========== -->
 <section class="featured">
   <div class="container">
@@ -309,54 +249,5 @@ function getImagePath($path) {
 </section>
 
 <!-- Footer (restored to original design) -->
-<section class="footer">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-6 mx-auto text-center">
-        <div class="">
-          <img class="footer-logo" src="img/logo-dark.png" alt="Worldison International Logo">
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 mx-auto">
-        <div class="footer-nav">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="index.php">Home </a></li>
-            <li class="nav-item"><a class="nav-link" href="about.php">About </a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6 mx-auto">
-        <div class="sociale-icon">
-          <ul>
-            <li><a href="https://www.facebook.com/wsfcompany"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="https://www.twitter.com/worldison"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://www.instagram.com/worldison_sfc"><i class="fa fa-instagram"></i></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="copy-right">
-          <p class="margin-b-0"><a class="fweight-700" href="#">Worldison International</a> </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Vendor JS -->
-<script src="vendor/jQuery/jquery.min.js"></script>
-<script src="vendor/bootstrap/bootstrap.min.js"></script>
-<script src="vendor/slick/slick.min.js"></script>
-
-<!-- Main JS -->
-<script src="js/script.js"></script>
-
-</body>
-</html>
+<?php require_once __DIR__ . "/inc/footer.php"; ?>
+<?php require_once __DIR__ . "/inc/scripts.php"; ?>

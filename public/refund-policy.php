@@ -1,45 +1,13 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
 
-<head>
-  <meta charset="utf-8" />
-  <title>Refund, Cancellations and Services Policy - Worldison.org</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta content="width=device-width, initial-scale=1" name="viewport" />
-
-  <!-- SEO -->
-  <meta name="description" content="Worldison International Refund, Cancellations and Services Policy">
-  <meta name="keywords" content="Worldison, Refund Policy, Cancellations, Services Policy">
-
-  <!-- CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-</head>
-
-<body>
-  <!-- Header -->
-  <header class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand" href="index.php">
-        <img src="img/logo-dark.png" alt="Worldison Logo" class="logo-img" style="max-height:50px;">
-      </a>
-      <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Nav -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-          <li class="nav-item"><a class="nav-link active" href="refund.php">Refund Policy</a></li>
-        </ul>
-      </div>
-    </div>
-  </header>
+<?php
+$pageTitle = 'Refund, Cancellations and Services Policy - Worldison.org';
+$pageDescription = 'Worldison International Refund, Cancellations and Services Policy';
+$pageKeywords = 'Worldison, Refund Policy, Cancellations, Services Policy';
+?>
+<?php require_once __DIR__ . "/inc/head.php"; ?>
+<?php require_once __DIR__ . "/inc/header.php"; ?>
+<!-- Header -->
+  
 
   <!-- Page Content -->
   <section class="py-5">
@@ -132,17 +100,7 @@
 
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-light py-4">
-    <div class="container text-center">
-      <p>&copy; 2025 Worldison International. All Rights Reserved.</p>
-      <p>123 Main Street, Benin City, Edo State, Nigeria | Phone: +234 800 123 4567</p>
-      <p><a href="mailto:info@worldison.org" class="text-light">info@worldison.org</a></p>
-    </div>
-  </footer>
-
-  <!-- JS -->
+  <?php require_once __DIR__ . "/inc/footer.php"; ?>
+<!-- JS -->
   <script src="js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+<?php require_once __DIR__ . "/inc/scripts.php"; ?>
