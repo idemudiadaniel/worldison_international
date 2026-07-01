@@ -145,6 +145,15 @@ foreach($visitors_by_country as $row){
         $id = $_SESSION['user_id'];
         $result = $conn->query("SELECT * FROM users WHERE id=$id");
         $user = $result->fetch_assoc();
+
+        $branchName = $user['branch_name'] ?? '';
+        if (empty($branchName) && !empty($user['branch_id'])) {
+            $branchResult = $conn->query('SELECT branch_name FROM branches WHERE branch_id = ' . intval($user['branch_id']));
+            if ($branchResult) {
+                $branchRow = $branchResult->fetch_assoc();
+                $branchName = $branchRow['branch_name'] ?? '';
+            }
+        }
         ?>
         <p><strong>Username:</strong> <?php echo $user['username']; ?></p>
         <p><strong>Email:</strong> <?php echo $user['email']; ?></p>
@@ -152,7 +161,7 @@ foreach($visitors_by_country as $row){
         <p><strong>Role:</strong> <?php echo ucfirst($user['role']); ?></p>
         <p><strong>Employment Type:</strong> <?php echo ($user['employment_type']); ?></p>
         <p><strong>Job Title:</strong> <?php echo ($user['job_title']); ?></p>
-        <p><strong>Branch Name:</strong> <?php echo ($user['branch_name']); ?></p>
+        <p><strong>Branch Name:</strong> <?php echo $branchName ?: 'N/A'; ?></p>
                           <button id="installBtn" style="display:none;" class="btn btn-primary btn-block">
   Install App
 </button>

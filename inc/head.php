@@ -1,7 +1,9 @@
 <?php
-ini_set('session.cookie_samesite', 'None');
-ini_set('session.cookie_secure', '1');
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.cookie_samesite', 'None');
+    ini_set('session.cookie_secure', '1');
+    session_start();
+}
 
 // List of pages you don't want indexed
 $noindex_pages = [
