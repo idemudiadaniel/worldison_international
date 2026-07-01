@@ -1,15 +1,24 @@
 <?php
-// Database connection settings.
-// Adjust values or set environment variables before running the application.
-$DB_HOST = getenv('DB_HOST') ?: '127.0.0.1';
-$DB_USER = getenv('DB_USER') ?: 'worldison_user';
-$DB_PASS = getenv('DB_PASS') ?: 'worldison_pass';
-$DB_NAME = getenv('DB_NAME') ?: 'worldison';
-$DB_PORT = getenv('DB_PORT') ?: 3306;
+// Set correct timezone before anything else
+date_default_timezone_set('Africa/Lagos');
 
-$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME, $DB_PORT);
+// Database connection settings
+$host = "127.0.0.1";
+$user = "worldison_user";
+$pass = "worldison_pass";
+$db   = "worldison";
+
+// Create connection
+$conn = new mysqli($host, $user, $pass, $db);
+
+// Check connection
 if ($conn->connect_error) {
-    die('Database connection failed: ' . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-$conn->set_charset('utf8mb4');
+// Ensure MySQL uses Lagos timezone (UTC+1)
+mysqli_query($conn, "SET time_zone = '+01:00'");
+
+// Optional: uncomment to verify connection & timezone
+// echo "Connected successfully. Server time: " . date('Y-m-d H:i:s');
+?>

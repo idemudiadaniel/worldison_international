@@ -1,16 +1,35 @@
 <?php
-include __DIR__ . "/../inc/db.php"; // adjust path if needed
+require_once __DIR__ . "/../inc/db.php";
+
+if (!isset($conn) || !($conn instanceof mysqli)) {
+    http_response_code(500);
+    echo 'Database connection unavailable.';
+    exit;
+}
 
 function escapeHtml($str = "") {
   return htmlspecialchars((string)$str, ENT_QUOTES, 'UTF-8');
 }
 
 function getImagePath($filename) {
-  $file = "../uploads/projects/" . ltrim($filename, "/");
-  if (!empty($filename) && file_exists($file)) {
-      return $file; // returns correct relative path
+  $filename = trim((string)$filename);
+  $filename = str_replace(['../', '..\\'], '', $filename);
+  $filename = basename($filename);
+
+  if ($filename === '') {
+      return "img/970x647/01.jpg";
   }
-  return "img/970x647/01.jpg"; // fallback
+
+  if (!preg_match('/^[a-zA-Z0-9_\-]+\.(jpg|jpeg|png|gif)$/i', $filename)) {
+      return "img/970x647/01.jpg";
+  }
+
+  $file = __DIR__ . "/../uploads/projects/" . $filename;
+  if (file_exists($file)) {
+      return "uploads/projects/" . rawurlencode($filename);
+  }
+
+  return "img/970x647/01.jpg";
 }
 
 // Fetch all published projects
@@ -40,21 +59,24 @@ $stmt->execute();
 $stmt->store_result();
 
 if($stmt->num_rows === 0){
-    // Fetch country from free IP API
+    // Fetch country from free IP API with a short timeout to avoid blocking the page.
     $country = 'Unknown';
-    $response = @file_get_contents("http://ip-api.com/json/{$ip}");
-    if($response){
+    $context = stream_context_create(['http' => ['timeout' => 2]]);
+    $response = @file_get_contents("http://ip-api.com/json/{$ip}", false, $context);
+    if ($response !== false) {
         $data = json_decode($response, true);
-        if(isset($data['country'])){
+        if (isset($data['country'])) {
             $country = $data['country'];
         }
     }
 
     // Insert visitor record
     $stmt = $conn->prepare("INSERT INTO landing_visitors (ip_address, country, user_agent) VALUES (?, ?, ?)");
-    $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
-    $stmt->bind_param("sss", $ip, $country, $user_agent);
-    $stmt->execute();
+    if ($stmt) {
+        $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+        $stmt->bind_param("sss", $ip, $country, $user_agent);
+        $stmt->execute();
+    }
 }
 ?>
 
@@ -634,7 +656,7 @@ if($stmt->num_rows === 0){
                         <li class="footer-list-item"><a href="contact.php"><i class="fas fa-envelope-open-text"></i> Contact</a></li>
                         <li class="footer-list-item"><a href="blog.php"><i class="fas fa-envelope-open-text"></i> blog</a></li>
                         <li class="footer-list-item"><a href="#"><i class="fas fa-concierge-bell"></i> Academy</a></li>
-                        <li class="footer-list-item"><a href="/login.php"><i class="fas fa-users"></i> Portal</a></li>
+                        <li class="footer-list-item"><a href="../login.php"><i class="fas fa-users"></i> Portal</a></li>
                     </ul>
                     <!-- End List -->
                 </div>

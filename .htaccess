@@ -1,0 +1,20 @@
+# Root entrypoint for shared hosting and Codespaces
+# Use index.php as the site front controller and prevent directory listing.
+
+DirectoryIndex index.php
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Rewrite requests for non-existing files/directories to index.php
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.php [L,QSA]
+</IfModule>
+
+# Deny direct access to sensitive files
+<FilesMatch "\.(env|ini|phar|sh|bak|sql|log)$">
+  Require all denied
+</FilesMatch>

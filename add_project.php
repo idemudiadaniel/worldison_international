@@ -1,6 +1,7 @@
 <?php 
 include("inc/init.php"); 
 include("inc/db.php"); 
+require_once "inc/upload.php";
 
 // Restrict to specific roles
 $allowedRoles = ['admin','ceo','editor'];
@@ -8,6 +9,8 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], $allowedRoles)) {
     header("Location: " . BASE_URL . "dashboard.php");
     exit;
 }
+
+requireCsrf();
 
 $message = "";
 
@@ -21,24 +24,16 @@ if (isset($_POST['save_project'])) {
     $image_url = null;
     $video_url = null;
 
-    if (!empty($_FILES['image']['name'])) {
-        $target_dir = "uploads/projects/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $filename = time()."_".basename($_FILES["image"]["name"]);
-        $target_file = $target_dir.$filename;
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $image_url = $filename;
+    try {
+        if (!empty($_FILES['image']['name'])) {
+            $image_url = validateUploadFile('image', "uploads/projects/", ['jpg','jpeg','png','gif','webp'], UPLOAD_MAX_IMAGE_BYTES);
         }
-    }
 
-    if (!empty($_FILES['video']['name'])) {
-        $target_dir = "uploads/projects/videos/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $filename = time()."_".basename($_FILES["video"]["name"]);
-        $target_file = $target_dir.$filename;
-        if (move_uploaded_file($_FILES["video"]["tmp_name"], $target_file)) {
-            $video_url = $filename;
+        if (!empty($_FILES['video']['name'])) {
+            $video_url = validateUploadFile('video', "uploads/projects/videos/", UPLOAD_ALLOWED_EXTENSIONS, UPLOAD_MAX_DOCUMENT_BYTES);
         }
+    } catch (RuntimeException $e) {
+        $message = "<div class='alert alert-danger'>❌ " . htmlspecialchars($e->getMessage()) . "</div>";
     }
 
     $sql = "INSERT INTO projects (title, category, description, image_url, video_url, status) VALUES (?, ?, ?, ?, ?, ?)";
@@ -90,6 +85,7 @@ if (isset($_POST['delete_project']) && !empty($_POST['delete_id'])) {
           <div class="card-body">
             <h4 class="card-title">Add New Project</h4>
             <form method="POST" action="" enctype="multipart/form-data" onsubmit="return syncContent()">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
               <div class="form-group">
                 <label>Title</label>
                 <input type="text" name="title" class="form-control" required>

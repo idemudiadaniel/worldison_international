@@ -335,7 +335,7 @@
                         <li class="footer-list-item"><a href="contact.php"><i class="fas fa-envelope-open-text"></i> Contact</a></li>
                         <li class="footer-list-item"><a href="blog.php"><i class="fas fa-envelope-open-text"></i> blog</a></li>
                         <li class="footer-list-item"><a href="#"><i class="fas fa-concierge-bell"></i> Academy</a></li>
-                        <li class="footer-list-item"><a href="/login.php"><i class="fas fa-users"></i> Portal</a></li>
+                        <li class="footer-list-item"><a href="../login.php"><i class="fas fa-users"></i> Portal</a></li>
                     </ul>
         </div>
 

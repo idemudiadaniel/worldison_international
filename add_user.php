@@ -53,7 +53,7 @@ if (isset($_POST['add_user'])) {
               <li><strong>Email:</strong> $email</li>
               <li><strong>Password:</strong> $plain_pass</li>
           </ul>
-          <p>You can log in here: <a href='https://worldison.org/login.php'>Login Now</a></p>
+          <p>You can log in here: <a href='https://worldison.org../login.php'>Login Now</a></p>
           <br>
           <p>Best regards,<br>Worldison Admin Team</p>
       ";

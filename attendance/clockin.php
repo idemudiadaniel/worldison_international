@@ -58,7 +58,7 @@ date_default_timezone_set('Africa/Lagos');
 <!-- ✅ Responsive Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark shadow-sm fixed-top">
 <div class="container-fluid px-4"> 
-    <a class="navbar-brand fw-bold" href="/login.php">iceHRMClock</a>
+    <a class="navbar-brand fw-bold" href="../login.php">iceHRMClock</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@ date_default_timezone_set('Africa/Lagos');
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/login.php">Login</a>
+          <a class="nav-link" href="../login.php">Login</a>
         </li>
       </ul>
     </div>

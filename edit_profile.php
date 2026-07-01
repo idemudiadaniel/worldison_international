@@ -1,5 +1,6 @@
 <?php
 include("inc/db.php");
+require_once "inc/upload.php";
 session_start();
 
 // ✅ Only allow certain roles to view payroll list (admin, accountant, ceo, manager)
@@ -7,6 +8,8 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin','ceo','ma
   header("Location: dashboard.php");
   exit;
 }
+
+requireCsrf();
 // Validate ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Invalid request");
@@ -33,37 +36,7 @@ if ($branchQuery && $branchQuery->num_rows > 0) {
     }
 }
 
-/**
- * Handle file upload
- */
-function uploadFile($fileKey, $oldFile, $allowedExtensions, $maxFileSize) {
-    if (!empty($_FILES[$fileKey]['name'])) {
-        $fileTmp  = $_FILES[$fileKey]['tmp_name'];
-        $fileName = basename($_FILES[$fileKey]['name']);
-        $fileSize = $_FILES[$fileKey]['size'];
-        $ext      = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-        // Validate size
-        if ($fileSize > $maxFileSize) {
-            throw new Exception("File {$fileKey} is too large. Max size is " . ($maxFileSize/1024/1024) . "MB.");
-        }
-
-        // Validate extension
-        if (!in_array($ext, $allowedExtensions)) {
-            throw new Exception("Invalid file type for {$fileKey}. Allowed: " . implode(", ", $allowedExtensions));
-        }
-
-        $newName = time() . "_" . preg_replace("/[^a-zA-Z0-9\._-]/", "_", $fileName);
-        $targetPath = __DIR__ . "/uploads/" . $newName;
-
-        if (move_uploaded_file($fileTmp, $targetPath)) {
-            return $newName; // Save filename only
-        } else {
-            throw new Exception("❌ Failed to upload {$fileKey}. Check folder permissions.");
-        }
-    }
-    return $oldFile; // Keep old if nothing uploaded
-}
+// No local upload helper here; use shared upload validation from inc/upload.php.
 
 // Choose display picture: prefer document picture, fallback to profile picture
 $displayPicture = !empty($previewUser['document_picture']) 
@@ -101,10 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $role           = $_POST['role'] ?? $previewUser['role'];
 
         // File uploads
-        $academic_certificate = uploadFile("academic_certificate", $previewUser['academic_certificate'], ['jpg','jpeg','png','pdf','doc','docx'], 5 * 1024 * 1024);
-        $other_certificate    = uploadFile("other_certificate", $previewUser['other_certificate'], ['jpg','jpeg','png','pdf','doc','docx'], 5 * 1024 * 1024);
-        $staff_documents      = uploadFile("staff_documents", $previewUser['staff_documents'], ['jpg','jpeg','png','pdf','doc','docx','zip'], 10 * 1024 * 1024);
-        $document_picture     = uploadFile("document_picture", $previewUser['document_picture'], ['jpg','jpeg','png','gif'], 2 * 1024 * 1024);
+        $academic_certificate = $previewUser['academic_certificate'];
+        $other_certificate    = $previewUser['other_certificate'];
+        $staff_documents      = $previewUser['staff_documents'];
+        $document_picture     = $previewUser['document_picture'];
+
+        if (!empty($_FILES['academic_certificate']['name'])) {
+            $academic_certificate = validateUploadFile('academic_certificate', __DIR__ . '/uploads/', ['jpg','jpeg','png','pdf','doc','docx'], UPLOAD_MAX_DOCUMENT_BYTES);
+        }
+        if (!empty($_FILES['other_certificate']['name'])) {
+            $other_certificate = validateUploadFile('other_certificate', __DIR__ . '/uploads/', ['jpg','jpeg','png','pdf','doc','docx'], UPLOAD_MAX_DOCUMENT_BYTES);
+        }
+        if (!empty($_FILES['staff_documents']['name'])) {
+            $staff_documents = validateUploadFile('staff_documents', __DIR__ . '/uploads/', ['jpg','jpeg','png','pdf','doc','docx','zip'], UPLOAD_MAX_DOCUMENT_BYTES);
+        }
+        if (!empty($_FILES['document_picture']['name'])) {
+            $document_picture = validateUploadFile('document_picture', __DIR__ . '/uploads/', ['jpg','jpeg','png','gif','webp'], UPLOAD_MAX_IMAGE_BYTES);
+        }
 
         // Always keep existing profile_picture unless changed in a separate form
         $profile_picture = $previewUser['profile_picture'];
@@ -156,6 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h4 class="card-title">Edit User Profile</h4>
             <?php if (isset($error)) echo "<p class='text-danger'>$error</p>"; ?>
             <form method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
               <div class="row">
 
                 <!-- Personal Info -->

@@ -1,5 +1,6 @@
 <?php
 include("inc/db.php");
+require_once "inc/upload.php";
 session_start();
 
 // ✅ Only allow certain roles to view payroll list (admin, accountant, ceo, manager)
@@ -7,6 +8,8 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin','ceo','ed
   header("Location: dashboard.php");
   exit;
 }
+
+requireCsrf();
 // ✅ Get post ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: blog_posts.php");
@@ -36,12 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle image upload (optional update)
     $imageUrl = $post['image_url']; // keep old one if none uploaded
     if (!empty($_FILES['image']['name'])) {
-        $targetDir  = "uploads/";
-        $fileName   = time() . "_" . basename($_FILES['image']['name']);
-        $targetFile = $targetDir . $fileName;
-
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
-            $imageUrl = $targetFile;
+        try {
+            $imageUrl = validateUploadFile('image', "uploads/", ['jpg','jpeg','png','gif','webp'], UPLOAD_MAX_IMAGE_BYTES);
+        } catch (RuntimeException $e) {
+            $error = $e->getMessage();
         }
     }
 
@@ -70,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php endif; ?>
 
       <form method="post" enctype="multipart/form-data" onsubmit="return syncContent()">
+        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
         <div class="form-group">
           <label>Title</label>
           <input type="text" name="title" class="form-control" value="<?= htmlspecialchars($post['title']) ?>" required>

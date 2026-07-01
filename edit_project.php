@@ -1,12 +1,15 @@
 <?php 
 include("inc/init.php"); 
 include("inc/db.php"); 
+require_once "inc/upload.php";
 
 // ✅ Only allow certain roles to view/edit projects
 if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin','ceo','editor'])) {
     header("Location: dashboard.php");
     exit;
 }
+
+requireCsrf();
 
 // -------------------- GET PROJECT --------------------
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -36,26 +39,18 @@ if (isset($_POST['update_project'])) {
     $video_url = $project['video_url'];
 
     if (!empty($_FILES['image']['name'])) {
-        $target_dir = "uploads/projects/images/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $filename = time()."_".basename($_FILES["image"]["name"]);
-        $target_file = $target_dir.$filename;
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $image_url = $filename;
+        try {
+            $image_url = validateUploadFile('image', "uploads/projects/images/", ['jpg','jpeg','png','gif','webp'], UPLOAD_MAX_IMAGE_BYTES);
+        } catch (RuntimeException $e) {
+            $message = "<div class='alert alert-danger'>❌ " . htmlspecialchars($e->getMessage()) . "</div>";
         }
     }
 
     if (!empty($_FILES['video']['name'])) {
-        $target_dir = "uploads/projects/videos/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $filename = time()."_".basename($_FILES["video"]["name"]);
-        $target_file = $target_dir.$filename;
-        $allowed = ['mp4','webm','ogg'];
-        $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
-        if (in_array($ext, $allowed)) {
-            if (move_uploaded_file($_FILES["video"]["tmp_name"], $target_file)) {
-                $video_url = $filename;
-            }
+        try {
+            $video_url = validateUploadFile('video', "uploads/projects/videos/", UPLOAD_ALLOWED_EXTENSIONS, UPLOAD_MAX_DOCUMENT_BYTES);
+        } catch (RuntimeException $e) {
+            $message = "<div class='alert alert-danger'>❌ " . htmlspecialchars($e->getMessage()) . "</div>";
         }
     }
 
@@ -89,7 +84,7 @@ if (isset($_POST['update_project'])) {
     <?php if (!empty($message)) echo $message; ?>
 
     <form method="POST" enctype="multipart/form-data" onsubmit="return syncContent()">
-        <div class="mb-3">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
             <label class="form-label">Title</label>
             <input type="text" name="title" class="form-control" value="<?=htmlspecialchars($project['title'])?>" required>
         </div>

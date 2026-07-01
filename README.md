@@ -12,10 +12,10 @@ This project is a PHP app served from `public/`.
 
 ### Recommended startup steps
 
-1. Ensure MariaDB is running:
+1. Ensure MySQL is running:
 
 ```bash
-sudo service mariadb start
+sudo service mysql start
 ```
 
 2. Create the app database (optional if already created):
@@ -25,11 +25,21 @@ sudo mysql -e "CREATE DATABASE IF NOT EXISTS worldison CHARACTER SET utf8mb4 COL
 sudo mysql -e "CREATE USER IF NOT EXISTS 'worldison_user'@'localhost' IDENTIFIED BY 'worldison_pass'; GRANT ALL PRIVILEGES ON worldison.* TO 'worldison_user'@'localhost'; FLUSH PRIVILEGES;"
 ```
 
-3. Start the PHP built-in server from the project root:
+3. Start MySQL before launching the PHP server:
 
 ```bash
+sudo service mysql start
+sudo service mysql status --no-pager
+```
+
+4. Start the PHP built-in server from the project root:
+
+```bash
+cd /workspaces/worldison_international
 php8.3 -S 0.0.0.0:8001 -t public
 ```
+
+If `php8.3` is not installed, use `php -v` to confirm the default CLI version and install PHP 8.3 if needed.
 
 If `php8.3` is not installed, use `php -v` to confirm the default CLI version and install PHP 8.3 if needed.
 

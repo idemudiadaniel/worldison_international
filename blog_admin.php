@@ -1,6 +1,7 @@
 <?php 
 include("inc/init.php"); 
 include("inc/db.php"); 
+require_once "inc/upload.php";
 
 // Restrict to specific roles
 $allowedRoles = ['admin','ceo','editor'];
@@ -8,6 +9,8 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], $allowedRoles)) {
     header("Location: " . BASE_URL . "dashboard.php");
     exit;
 }
+
+requireCsrf();
 
 $message = "";
 
@@ -19,14 +22,12 @@ if (isset($_POST['save_post'])) {
     $status   = ($_POST['save_post'] === 'draft') ? 'draft' : 'published';
 
     $image_url = null;
-    if (!empty($_FILES['image']['name'])) {
-        $target_dir = "uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $filename = time()."_".basename($_FILES["image"]["name"]);
-        $target_file = $target_dir.$filename;
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $image_url = $target_file;
+    try {
+        if (!empty($_FILES['image']['name'])) {
+            $image_url = validateUploadFile('image', "uploads/", ['jpg','jpeg','png','gif','webp'], UPLOAD_MAX_IMAGE_BYTES);
         }
+    } catch (RuntimeException $e) {
+        $message = "<div class='alert alert-danger'>❌ " . htmlspecialchars($e->getMessage()) . "</div>";
     }
 
     $sql = "INSERT INTO blogs (title, category, content, image_url, status) VALUES (?, ?, ?, ?, ?)";
@@ -91,6 +92,7 @@ if (isset($_POST['delete_comment'])) {
           <div class="card-body">
             <h4 class="card-title">Add New Post</h4>
             <form method="POST" action="" enctype="multipart/form-data" novalidate onsubmit="return syncContent()">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
               <div class="form-group">
                 <label>Title</label>
                 <input type="text" name="title" class="form-control" required>

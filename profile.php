@@ -1,8 +1,11 @@
 <?php
 require_once "inc/init.php"; // handles session + db
+require_once "inc/upload.php";
 
 // Only staff and admin can access
 requireRole(['admin','staff','ceo','manager','editor', 'accountant']);
+
+requireCsrf();
 
 $user_id = (int) $_SESSION['user_id'];
 $role    = $_SESSION['role'] ?? 'guest';
@@ -33,17 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Upload new profile picture if provided
     if (!empty($_FILES['profile_picture']['name'])) {
-        if (!is_dir($upload_dir)) mkdir($upload_dir, 0777, true);
-
-        $filename = time() . "_" . preg_replace('/[^a-zA-Z0-9._-]/', '_', basename($_FILES['profile_picture']['name']));
-        $target   = $upload_dir . $filename;
-
-        if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target)) {
-            // Delete old picture (if not default)
-            if (!empty($profile_filename) && file_exists($upload_dir . $profile_filename)) {
-                unlink($upload_dir . $profile_filename);
-            }
-            $profile_filename = $filename;
+        try {
+            $profile_filename = validateUploadFile('profile_picture', $upload_dir, ['jpg','jpeg','png','gif','webp'], UPLOAD_MAX_IMAGE_BYTES);
+        } catch (RuntimeException $e) {
+            $error = $e->getMessage();
         }
     }
 
@@ -80,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="card">
           <div class="card-body">
             <form method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
               <?php if ($role === 'admin'): ?>
                 <div class="form-group">
                   <label>Full Name</label>

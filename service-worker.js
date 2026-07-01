@@ -3,7 +3,7 @@ self.addEventListener("install", (event) => {
     caches.open("worldison-cache-v1").then((cache) => {
       return cache.addAll([
         "/",
-        "/login.php",
+        "../login.php",
         "/favicon.ico",
         "/manifest.json",
       ]);

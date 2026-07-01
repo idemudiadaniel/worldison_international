@@ -1,0 +1,12 @@
+# Disable directory listing
+Options -Indexes
+
+# Prevent PHP execution
+<FilesMatch "\.(php|php3|php4|php5|php7|php8|phtml|phar)$">
+    Require all denied
+</FilesMatch>
+
+# Protect hidden files
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
